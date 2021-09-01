@@ -1252,7 +1252,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     ];
 
     string[] private moreLimitedItems = [
-        "bolts of brightsilk",
+        "bolts of silk",
         "bars of silver",
         "bars of copper"
     ];
@@ -1263,7 +1263,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         "slugs of titanium",
         "vials of holy water",
         "pieces of demonhide",
-        "bolts of silk"
+        "bolts of brightsilk"
     ];
 
     string[] private moreRareItems = [
@@ -1285,7 +1285,6 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     string[] private fallbackItems = [
         "sheets of paper",
-        "pieces of coal",
         "pieces of bone"
     ];
 
@@ -1329,7 +1328,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getFallbackItems(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, 50, 500);
+        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, 10, 100);
     }
 
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 minQuantity, uint256 maxQuantity) internal pure returns (string memory) {
