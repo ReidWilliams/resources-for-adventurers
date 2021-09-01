@@ -1289,6 +1289,9 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     ERC721 loot = ERC721(0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7);
 
+    uint256 public lootersPrice = 30000000000000000; //0.03 ETH
+    uint256 public publicPrice = 150000000000000000; //0.15 ETH
+
     function random(string memory input) internal pure returns (uint256) {
         return uint256(keccak256(abi.encodePacked(input)));
     }
@@ -1376,14 +1379,16 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         return output;
     }
 
-    function claim(uint256 tokenId) public nonReentrant {
+    function claim(uint256 tokenId) public payable nonReentrant {
         require(tokenId > 8000 && tokenId < 9576, "Token ID invalid");
+        require(publicPrice <= msg.value, "Ether value sent is not correct");
         _safeMint(_msgSender(), tokenId);
     }
-    
-    function claimForLoot(uint256 tokenId) public nonReentrant {
+   
+    function claimForLoot(uint256 tokenId) public payable nonReentrant {
         require(tokenId > 0 && tokenId < 8001, "Token ID invalid");
         require(loot.ownerOf(tokenId) == msg.sender, "Not Loot owner");
+        require(lootersPrice <= msg.value, "Ether value sent is not correct");
         _safeMint(_msgSender(), tokenId);
     }
     
