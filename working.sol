@@ -1279,8 +1279,8 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         "sealed titanium box",
         "prismatic shard",
         "geode",
-        "entanglement shard A",
-        "entanglement shard B"
+        "entanglement shard 'A'",
+        "entanglement shard 'B'"
     ];
 
     string[] private fallbackItems = [
@@ -1296,30 +1296,30 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getCommon(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "COMMON", commonItems, 1000);
+        return pluck(tokenId, "COMMON", commonItems, 100, 1000);
     }
 
     function getLimited(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "LIMITED", limitedItems, 500);
+        return pluck(tokenId, "LIMITED", limitedItems, 50, 500);
     }
 
     function getMoreLimited(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "MORELIMITED", moreLimitedItems, 250);
+        return pluck(tokenId, "MORELIMITED", moreLimitedItems, 25, 250);
     }
 
     function getRare(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "RARE", rareItems, 100);
+        return pluck(tokenId, "RARE", rareItems, 10, 100);
     }
 
     function getMoreRare(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "MORERARE", moreRareItems, 10);
+        return pluck(tokenId, "MORERARE", moreRareItems, 1, 10);
     }
 
     function getSuperRare(uint256 tokenId) public view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked("SUPERRARE", toString(tokenId))));
         uint256 greatness = rand % 100;
 
-        if (greatness >= 75) {
+        if (greatness >= 90) {
             string memory resource = superRareItems[rand % superRareItems.length];
             string memory output = string(abi.encodePacked("1 ", resource));
             return output;
@@ -1329,12 +1329,12 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getFallbackItems(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, 100);
+        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, 50, 500);
     }
 
-    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 maxQuantity) internal pure returns (string memory) {
+    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 minQuantity, uint256 maxQuantity) internal pure returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
-        uint256 quantity = (rand % maxQuantity) + 1;
+        uint256 quantity = (rand % (maxQuantity-minQuantity)) + minQuantity;
 
         string memory resource = sourceArray[rand % sourceArray.length];
         string memory output = string(abi.encodePacked(toString(quantity), " ", resource));
