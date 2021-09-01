@@ -164,9 +164,6 @@ interface IERC721 is IERC165 {
     ) external;
 }
 
-
-
-
 /**
  * @dev String operations.
  */
@@ -230,9 +227,6 @@ library Strings {
     }
 }
 
-
-
-
 /*
  * @dev Provides information about the current execution context, including the
  * sender of the transaction and its data. While these are generally available
@@ -252,14 +246,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
-
-
-
-
-
-
-
 
 /**
  * @dev Contract module which provides a basic access control mechanism, where
@@ -327,10 +313,6 @@ abstract contract Ownable is Context {
     }
 }
 
-
-
-
-
 /**
  * @dev Contract module that helps prevent reentrant calls to a function.
  *
@@ -390,19 +372,6 @@ abstract contract ReentrancyGuard {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * @title ERC721 token receiver interface
  * @dev Interface for any contract that wants to support safeTransfers
@@ -426,12 +395,6 @@ interface IERC721Receiver {
     ) external returns (bytes4);
 }
 
-
-
-
-
-
-
 /**
  * @title ERC-721 Non-Fungible Token Standard, optional metadata extension
  * @dev See https://eips.ethereum.org/EIPS/eip-721
@@ -452,10 +415,6 @@ interface IERC721Metadata is IERC721 {
      */
     function tokenURI(uint256 tokenId) external view returns (string memory);
 }
-
-
-
-
 
 /**
  * @dev Collection of functions related to the address type
@@ -1413,7 +1372,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
         output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12]));
         
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Sheet #', toString(tokenId), '", "description": "Ability Scores are randomized table top RPG style stats generated and stored on chain. Feel free to use Ability Scores in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Sheet #', toString(tokenId), '", "description": "Randomized collections of resources for adventurers generated and stored on chain. Feel free to use Resources in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
@@ -1457,7 +1416,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         return string(buffer);
     }
     
-    constructor() ERC721("Ability Score", "SCORE") Ownable() {}
+    constructor() ERC721("Resources for Adventurers", "RESC") Ownable() {}
 }
 
 /// [MIT License]
