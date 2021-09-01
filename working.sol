@@ -1286,15 +1286,23 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     string[] private commonItems = [
-        "Wood",
-        "Wool",
-        "Linen"
+        "wood",
+        "wool",
+        "linen"
     ];
+
+    string[] private commonItemsUnits = [
+        "Planks",
+        "Bolts",
+        "Bolts"
+    ];
+
+
 
     ERC721 loot = ERC721(0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7);
 
     function getCommonItems(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "COMMON", commonItems, 100);
+        return pluck(tokenId, "COMMON", commonItems, commonItemsUnits, 100);
     }
     
     function random(string memory input) internal pure returns (uint256) {
@@ -1325,12 +1333,14 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     //     return pluck(tokenId, "Charisma");
     // }
 
-    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 maxQuantity) internal pure returns (string memory) {
+    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, string[] memory unitArray, uint256 maxQuantity) internal pure returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         uint256 quantity = rand % maxQuantity;
+
+        string memory unit = unitArray[rand % unitArray.length];
         string memory resource = sourceArray[rand % sourceArray.length];
 
-        string memory output = string(abi.encodePacked(resource, " of ", toString(quantity)));
+        string memory output = string(abi.encodePacked(toString(quantity), " ", unit, " of ", resource));
         return output;
     }
     
