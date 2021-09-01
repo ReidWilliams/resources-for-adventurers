@@ -1294,12 +1294,11 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     ERC721 loot = ERC721(0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7);
 
     function getCommonItems(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "COMMON", commonItems);
+        return pluck(tokenId, "COMMON", commonItems, 100);
     }
     
-    // mirror a dice roll
     function random(string memory input) internal pure returns (uint256) {
-        return (uint256(keccak256(abi.encodePacked(input))) % 6) + 1;
+        return uint256(keccak256(abi.encodePacked(input)));
     }
     
     // function getStrength(uint256 tokenId) public pure returns (string memory) {
@@ -1326,9 +1325,12 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     //     return pluck(tokenId, "Charisma");
     // }
 
-    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal pure returns (string memory) {
+    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 maxQuantity) internal pure returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
-        string memory output = sourceArray[rand % sourceArray.length];
+        uint256 quantity = rand % maxQuantity;
+        string memory resource = sourceArray[rand % sourceArray.length];
+
+        string memory output = string(abi.encodePacked(resource, " of ", toString(quantity)));
         return output;
     }
     

@@ -1,0 +1,93 @@
+Pseudocode
+
+
+
+
+
+string[] private basicMaterials = [
+    Paper
+    Wood
+    Bone
+    Stone
+    Coal
+]
+
+
+string[] private fibers = [
+    Silk
+    Linen
+    Wool
+    Dragonskin
+    Leather
+    Demonhide
+    Brightsilk
+]
+
+string[] private metals = [
+    Iron
+    Steel
+    Gold
+    Silver
+    Copper
+    Platinum
+    Titanium
+    Plasteel
+]
+
+
+string[] private essence = [
+    Holy Water
+    Ghost Vapor
+    Solar Essence
+    Void Essence
+    Demon Blood
+    Prismatic Shard
+]
+
+string[] misc = [
+    Geode
+    Old AOL disc
+    Sealed titanium box
+    Golden ticket
+    Spell book page 6
+    Entanglement shard A
+    Entanglement shard B
+    Kinetic sand
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+   
+    
+  
+
+    
+  
+    
+ 
