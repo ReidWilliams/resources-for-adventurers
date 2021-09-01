@@ -1286,34 +1286,55 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     string[] private commonItems = [
-        "wood",
-        "wool",
-        "linen"
+        "planks of wood",
+        "bolts of wool",
+        "ingots of iron",
+        "blocks of stone"
     ];
 
-    string[] private commonItemsUnits = [
-        "Planks",
-        "Bolts",
-        "Bolts"
+    string[] private limitedItems = [
+        "hides of leather",
+        "bars of steel",
+        "bolts of linen"
+    ];
+
+    string[] private moreLimitedItems = [
+        "bolts of brightsilk",
+        "bars of silver",
+        "bars of copper"
+    ];
+
+    string[] private rareItems = [
+        "bars of gold",
+        "bars of platinum",
+        "slugs of titanium",
+        "vials of holy water",
+        "pieces of demonhide",
+        "bolts of silk"
+    ];
+
+    string[] private moreRareItems = [
+        "sheets of plasteel",
+        "vials of demon blood",
+        "shards of void essence",
+        "sheaths of dragonskin",
+        "shards of solar essense",
+        "vials of distilled ghost vapor"
     ];
 
     string[] private superRareItems = [
         "sealed titanium box",
-        "prismatic shard"
+        "prismatic shard",
+        "geode",
+        "entanglement shard A",
+        "entanglement shard B"
     ];
 
     string[] private fallbackItems = [
-        "paper",
-        "iron",
-        "indigo"
+        "sheets of paper",
+        "pieces of coal",
+        "pieces of bone"
     ];
-
-    string[] private fallbackItemsUnits = [
-        "sheets",
-        "ingots",
-        "blues"
-    ];
-
 
     ERC721 loot = ERC721(0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7);
 
@@ -1322,7 +1343,23 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getCommon(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "COMMON", commonItems, commonItemsUnits, 100);
+        return pluck(tokenId, "COMMON", commonItems, 1000);
+    }
+
+    function getLimited(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "LIMITED", limitedItems, 500);
+    }
+
+    function getMoreLimited(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "MORELIMITED", moreLimitedItems, 250);
+    }
+
+    function getRare(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "RARE", rareItems, 100);
+    }
+
+    function getMoreRare(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "MORERARE", moreRareItems, 10);
     }
 
     function getSuperRare(uint256 tokenId) public view returns (string memory) {
@@ -1339,62 +1376,17 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getFallbackItems(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, fallbackItemsUnits, 100);
+        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, 100);
     }
 
-    
-    // function getStrength(uint256 tokenId) public pure returns (string memory) {
-    //     return pluck(tokenId, "Strength");
-    // }
-    
-    // function getDexterity(uint256 tokenId) public pure returns (string memory) {
-    //     return pluck(tokenId, "Dexterity");
-    // }
-    
-    // function getConstitution(uint256 tokenId) public pure returns (string memory) {
-    //     return pluck(tokenId, "Constitution");
-    // }
-    
-    // function getIntelligence(uint256 tokenId) public pure returns (string memory) {
-    //     return pluck(tokenId, "Intelligence");
-    // }
-
-    // function getWisdom(uint256 tokenId) public pure returns (string memory) {
-    //     return pluck(tokenId, "Wisdom");
-    // }
-    
-    // function getCharisma(uint256 tokenId) public pure returns (string memory) {
-    //     return pluck(tokenId, "Charisma");
-    // }
-
-    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, string[] memory unitArray, uint256 maxQuantity) internal pure returns (string memory) {
+    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 maxQuantity) internal pure returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         uint256 quantity = rand % maxQuantity;
 
-        string memory unit = unitArray[rand % unitArray.length];
         string memory resource = sourceArray[rand % sourceArray.length];
-
-        string memory output = string(abi.encodePacked(toString(quantity), " ", unit, " of ", resource));
+        string memory output = string(abi.encodePacked(toString(quantity), " ", resource));
         return output;
     }
-    
-    // function pluck(uint256 tokenId, string memory keyPrefix) internal pure returns (string memory) {
-    //     uint256 roll1 = random(string(abi.encodePacked(keyPrefix, toString(tokenId), "1")));
-    //     uint256 min = roll1;
-    //     uint256 roll2 = random(string(abi.encodePacked(keyPrefix, toString(tokenId), "2")));
-    //     min = min > roll2 ? roll2 : min;
-    //     uint256 roll3 = random(string(abi.encodePacked(keyPrefix, toString(tokenId), "3")));
-    //     min = min > roll3 ? roll3 : min;
-    //     uint256 roll4 = random(string(abi.encodePacked(keyPrefix, toString(tokenId), "4")));
-    //     min = min > roll4 ? roll4 : min;
-        
-    //     // get 3 highest dice rolls
-    //     uint256 stat = roll1 + roll2 + roll3 + roll4 - min;
-        
-    //     string memory output = string(abi.encodePacked(keyPrefix, ": ", toString(stat)));
-
-    //     return output;
-    // }
 
     function tokenURI(uint256 tokenId) override public pure returns (string memory) {
         string[13] memory parts;
