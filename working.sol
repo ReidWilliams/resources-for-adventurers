@@ -1276,7 +1276,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     ];
 
     string[] private superRareItems = [
-        "sealed titanium box",
+        "sealed titanium chest",
         "prismatic shard",
         "geode",
         "entanglement shard 'A'",
