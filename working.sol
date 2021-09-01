@@ -1297,17 +1297,51 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Bolts"
     ];
 
+    string[] private superRareItems = [
+        "sealed titanium box",
+        "prismatic shard"
+    ];
+
+    string[] private fallbackItems = [
+        "paper",
+        "iron",
+        "indigo"
+    ];
+
+    string[] private fallbackItemsUnits = [
+        "sheets",
+        "ingots",
+        "blues"
+    ];
 
 
     ERC721 loot = ERC721(0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7);
 
-    function getCommonItems(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "COMMON", commonItems, commonItemsUnits, 100);
-    }
-    
     function random(string memory input) internal pure returns (uint256) {
         return uint256(keccak256(abi.encodePacked(input)));
     }
+
+    function getCommon(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "COMMON", commonItems, commonItemsUnits, 100);
+    }
+
+    function getSuperRare(uint256 tokenId) public view returns (string memory) {
+        uint256 rand = random(string(abi.encodePacked("SUPERRARE", toString(tokenId))));
+        uint256 greatness = rand % 100;
+
+        if (greatness >= 75) {
+            string memory resource = superRareItems[rand % superRareItems.length];
+            string memory output = string(abi.encodePacked("1 ", resource));
+            return output;
+        } else {
+            return getFallbackItems(tokenId);
+        }
+    }
+
+    function getFallbackItems(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, fallbackItemsUnits, 100);
+    }
+
     
     // function getStrength(uint256 tokenId) public pure returns (string memory) {
     //     return pluck(tokenId, "Strength");
