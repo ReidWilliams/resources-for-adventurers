@@ -1267,7 +1267,6 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     ];
 
     string[] private moreRareItems = [
-        "sheets of plasteel",
         "vials of demon blood",
         "shards of void essence",
         "sheaths of dragonskin",
