@@ -1381,38 +1381,38 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 maxQuantity) internal pure returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
-        uint256 quantity = rand % maxQuantity;
+        uint256 quantity = (rand % maxQuantity) + 1;
 
         string memory resource = sourceArray[rand % sourceArray.length];
         string memory output = string(abi.encodePacked(toString(quantity), " ", resource));
         return output;
     }
 
-    function tokenURI(uint256 tokenId) override public pure returns (string memory) {
+    function tokenURI(uint256 tokenId) override public view returns (string memory) {
         string[13] memory parts;
         parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
 
-        parts[1] = '';
+        parts[1] = getCommon(tokenId);
 
         parts[2] = '</text><text x="10" y="40" class="base">';
 
-        parts[3] = '';
+        parts[3] = getLimited(tokenId);
 
         parts[4] = '</text><text x="10" y="60" class="base">';
 
-        parts[5] = '';
+        parts[5] = getMoreLimited(tokenId);
 
         parts[6] = '</text><text x="10" y="80" class="base">';
 
-        parts[7] = '';
+        parts[7] = getRare(tokenId);
 
         parts[8] = '</text><text x="10" y="100" class="base">';
 
-        parts[9] = '';
+        parts[9] = getMoreRare(tokenId);
 
         parts[10] = '</text><text x="10" y="120" class="base">';
 
-        parts[11] = '';
+        parts[11] = getSuperRare(tokenId);
 
         parts[12] = '</text></svg>';
 
