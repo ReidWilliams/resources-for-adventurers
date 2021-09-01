@@ -1295,19 +1295,19 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getCommon(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "COMMON", commonItems, 50, 500);
+        return pluck(tokenId, "COMMON", commonItems, 20, 200);
     }
 
     function getLimited(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "LIMITED", limitedItems, 25, 250);
+        return pluck(tokenId, "LIMITED", limitedItems, 10, 100);
     }
 
     function getMoreLimited(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "MORELIMITED", moreLimitedItems, 10, 100);
+        return pluck(tokenId, "MORELIMITED", moreLimitedItems, 5, 50);
     }
 
     function getRare(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "RARE", rareItems, 5, 50);
+        return pluck(tokenId, "RARE", rareItems, 3, 25);
     }
 
     function getMoreRare(uint256 tokenId) public view returns (string memory) {
@@ -1328,7 +1328,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getFallbackItems(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, 10, 100);
+        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, 10, 50);
     }
 
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 minQuantity, uint256 maxQuantity) internal pure returns (string memory) {
