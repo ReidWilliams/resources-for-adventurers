@@ -1247,7 +1247,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         "hides of Leather",
         "bars of Steel",
         "bolts of Linen",
-        "sheets of Paper",
+        "scrolls of Paper",
         "pieces of Bone"
     ];
 
@@ -1293,23 +1293,23 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getCommon(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "COMMON", commonItems, 20, 200);
+        return pluck(tokenId, "COMMON", commonItems, 150, 200);
     }
 
     function getLimited(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "LIMITED", limitedItems, 10, 100);
+        return pluck(tokenId, "LIMITED", limitedItems, 75, 100);
     }
 
     function getMoreLimited(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "MORELIMITED", moreLimitedItems, 5, 50);
+        return pluck(tokenId, "MORELIMITED", moreLimitedItems, 20, 50);
     }
 
     function getRare(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "RARE", rareItems, 3, 25);
+        return pluck(tokenId, "RARE", rareItems, 10, 25);
     }
 
     function getMoreRare(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "MORERARE", moreRareItems, 1, 10);
+        return pluck(tokenId, "MORERARE", moreRareItems, 1, 6);
     }
 
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 minQuantity, uint256 maxQuantity) internal pure returns (string memory) {
