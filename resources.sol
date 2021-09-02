@@ -1237,7 +1237,6 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 
 
 contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
-
     string[] private commonItems = [
         "planks of wood",
         "bolts of wool",
@@ -1291,6 +1290,13 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     uint256 public lootersPrice = 30000000000000000; //0.03 ETH
     uint256 public publicPrice = 150000000000000000; //0.15 ETH
+
+    function withdraw() public onlyOwner {
+        uint256 balance = address(this).balance;
+        payable(msg.sender).transfer(balance);
+    }
+
+    function deposit() public payable onlyOwner {}
 
     function random(string memory input) internal pure returns (uint256) {
         return uint256(keccak256(abi.encodePacked(input)));
@@ -1381,14 +1387,14 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     function claim(uint256 tokenId) public payable nonReentrant {
         require(tokenId > 8000 && tokenId < 9576, "Token ID invalid");
-        require(publicPrice <= msg.value, "Ether value sent is not correct");
+        require(msg.value >= publicPrice, "Not enough Ether");
         _safeMint(_msgSender(), tokenId);
     }
    
     function claimForLoot(uint256 tokenId) public payable nonReentrant {
         require(tokenId > 0 && tokenId < 8001, "Token ID invalid");
         require(loot.ownerOf(tokenId) == msg.sender, "Not Loot owner");
-        require(lootersPrice <= msg.value, "Ether value sent is not correct");
+        require(msg.value >= lootersPrice, "Not enough Ether");
         _safeMint(_msgSender(), tokenId);
     }
     
