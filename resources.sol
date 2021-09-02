@@ -1309,7 +1309,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
 
     function getMoreRare(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "MORERARE", moreRareItems, 1, 6);
+        return pluck(tokenId, "MORERARE", moreRareItems, 2, 6);
     }
 
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 minQuantity, uint256 maxQuantity) internal pure returns (string memory) {
