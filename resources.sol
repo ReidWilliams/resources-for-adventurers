@@ -1258,7 +1258,6 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     ];
 
     string[] private rareItems = [
-        "bars of Gold",
         "bars of Platinum",
         "slugs of Titanium",
         "bolts of Brightsilk",
