@@ -1238,52 +1238,51 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 
 contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     string[] private commonItems = [
-        "planks of wood",
-        "bolts of wool",
-        "ingots of iron",
-        "blocks of stone"
+        "planks of Wood",
+        "bolts of Wool",
+        "ingots of Iron",
+        "blocks of Stone"
     ];
 
     string[] private limitedItems = [
-        "hides of leather",
-        "bars of steel",
-        "bolts of linen"
+        "hides of Leather",
+        "bars of Steel",
+        "bolts of Linen"
     ];
 
     string[] private moreLimitedItems = [
-        "bolts of silk",
-        "bars of silver",
-        "bars of copper"
+        "bolts of Silk",
+        "bars of Silver",
+        "bars of Copper"
     ];
 
     string[] private rareItems = [
-        "bars of gold",
-        "bars of platinum",
-        "slugs of titanium",
-        "vials of holy water",
-        "pieces of demonhide",
-        "bolts of brightsilk"
+        "bars of Gold",
+        "bars of Platinum",
+        "slugs of Titanium",
+        "bolts of Brightsilk",
+        "sheaths of Dragonskin",
+        "slabs of Demonhide"
     ];
 
-    string[] private moreRareItems = [
-        "vials of demon blood",
-        "shards of void essence",
-        "sheaths of dragonskin",
-        "shards of solar essense",
-        "vials of distilled ghost vapor"
+    string[] private moreRareItems = [    
+        "vials of Divine Essence",
+        "vials of Demon Blood",
+        "vials of Solar Essense",
+        "vials of Lunar Essense",
+        "vials of Void Essence",
+        "chests of Eternal Gemstones",
+        "vials of Distilled Ghost Vapor"
     ];
 
     string[] private superRareItems = [
-        "sealed titanium chest",
-        "prismatic shard",
-        "geode",
-        "entanglement shard 'A'",
-        "entanglement shard 'B'"
+        "sealed divine chest",
+        "geode"
     ];
 
     string[] private fallbackItems = [
-        "sheets of paper",
-        "pieces of bone"
+        "sheets of Paper",
+        "shards of Bone"
     ];
 
     ERC721 loot = ERC721(0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7);
