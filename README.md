@@ -2,8 +2,8 @@
 
 ## Resources for Adventurers Testnet Contract
 
-commit ed95c32 contract that references tesnet LOOT contract
-https://rinkeby.etherscan.io/address/0x04e7a38ab5df44f29037f91f5900635794b322f7#code
+testing
+0x2D188717f0A848C9b1c5C375d35a21295911C1C5
 
 
 
@@ -21,6 +21,8 @@ https://testnets.opensea.io/assets/0x4c6e5f34b5fa81c86dfca09d75fe6c51a1052778/80
 
 Get token metadata
 https://rinkeby-api.opensea.io/asset/0x4c6e5f34b5fa81c86dfca09d75fe6c51a1052778/8001?format=json
+
+
 
 Verify contracts on Etherscan
 https://rinkeby.etherscan.io/verifyContract-solc?a=0x1faa0899d6d04e4d68c8de3304bcbb58254951c5
