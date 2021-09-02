@@ -1,13 +1,15 @@
 # resources-for-adventurers
 
-Our testing loot contract deployed at:
-https://rinkeby.etherscan.io/address/0xc248034e444b895a4d303a73c829060f33172bc0
 
-Current Rinkeby version of our resources contract at:
-https://rinkeby.etherscan.io/address/0x4c6e5f34b5fa81c86dfca09d75fe6c51a1052778
-It references the mainnet loot contract for verifying loot holders.
+Our resources contract that references tesnet LOOT contract
+https://rinkeby.etherscan.io/address/0x98b6e1d1f69fffb8443f82ea3e51c9587ef9dbac
 
-Rinkeby Loot contract
+
+Testing commit b267fde
+- 
+
+
+Rinkeby ORIGINAL Loot contract
 https://rinkeby.etherscan.io/address/0x5a73c0343fa1927970abdfb66a899c9d2f8932b7#code
 
 Test render an NFT
@@ -28,4 +30,3 @@ Reid @ Rinkeby
 
 
 
-- adjust 
