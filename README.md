@@ -1,12 +1,15 @@
 # resources-for-adventurers
 
+## Resources for Adventurers Testnet Contract
 
-Our resources contract that references tesnet LOOT contract
-https://rinkeby.etherscan.io/address/0x98b6e1d1f69fffb8443f82ea3e51c9587ef9dbac
+commit ed95c32 contract that references tesnet LOOT contract
+https://rinkeby.etherscan.io/address/0x04e7a38ab5df44f29037f91f5900635794b322f7#code
 
 
-Testing commit b267fde
-- 
+
+
+
+
 
 
 Rinkeby ORIGINAL Loot contract
