@@ -1235,7 +1235,6 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 }
 
-
 contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     string[] private commonItems = [
         "planks of Wood",
@@ -1247,7 +1246,9 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
     string[] private limitedItems = [
         "hides of Leather",
         "bars of Steel",
-        "bolts of Linen"
+        "bolts of Linen",
+        "sheets of Paper",
+        "shards of Bone"
     ];
 
     string[] private moreLimitedItems = [
@@ -1273,16 +1274,6 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         "vials of Void Essence",
         "chests of Eternal Gemstones",
         "vials of Distilled Ghost Vapor"
-    ];
-
-    string[] private superRareItems = [
-        "sealed divine chest",
-        "geode"
-    ];
-
-    string[] private fallbackItems = [
-        "sheets of Paper",
-        "shards of Bone"
     ];
 
     ERC721 loot = ERC721(0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7);
@@ -1321,23 +1312,6 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         return pluck(tokenId, "MORERARE", moreRareItems, 1, 10);
     }
 
-    function getSuperRare(uint256 tokenId) public view returns (string memory) {
-        uint256 rand = random(string(abi.encodePacked("SUPERRARE", toString(tokenId))));
-        uint256 greatness = rand % 100;
-
-        if (greatness >= 90) {
-            string memory resource = superRareItems[rand % superRareItems.length];
-            string memory output = string(abi.encodePacked("1 ", resource));
-            return output;
-        } else {
-            return getFallbackItems(tokenId);
-        }
-    }
-
-    function getFallbackItems(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "SUPERRAREFALLBACK", fallbackItems, 10, 50);
-    }
-
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, uint256 minQuantity, uint256 maxQuantity) internal pure returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         uint256 quantity = (rand % (maxQuantity-minQuantity)) + minQuantity;
@@ -1369,14 +1343,10 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         parts[9] = getMoreRare(tokenId);
 
-        parts[10] = '</text><text x="10" y="120" class="base">';
-
-        parts[11] = getSuperRare(tokenId);
-
-        parts[12] = '</text></svg>';
+        parts[10] = '</text></svg>';
 
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
-        output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12]));
+        output = string(abi.encodePacked(output, parts[9], parts[10]));
         
         string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Sheet #', toString(tokenId), '", "description": "Randomized collections of resources for adventurers generated and stored on chain. Feel free to use Resources in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
