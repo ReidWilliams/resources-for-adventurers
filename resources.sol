@@ -1248,13 +1248,13 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         "bars of Steel",
         "bolts of Linen",
         "sheets of Paper",
-        "shards of Bone"
+        "pieces of Bone"
     ];
 
     string[] private moreLimitedItems = [
         "bolts of Silk",
         "bars of Silver",
-        "bars of Copper"
+        "bars of Bronze"
     ];
 
     string[] private rareItems = [
@@ -1272,7 +1272,7 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         "vials of Solar Essense",
         "vials of Lunar Essense",
         "vials of Void Essence",
-        "chests of Eternal Gemstones",
+        "satchels of Eternal Gemstones",
         "vials of Distilled Ghost Vapor"
     ];
 
