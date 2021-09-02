@@ -1316,6 +1316,12 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         uint256 quantity = (rand % (maxQuantity-minQuantity)) + minQuantity;
 
+        uint256 luckRand = random(string(abi.encodePacked("LUCKY?", toString(tokenId))));
+        bool lucky = (luckRand % 100) == 42;
+        if (lucky) {
+            quantity = 3*quantity;
+        }
+
         string memory resource = sourceArray[rand % sourceArray.length];
         string memory output = string(abi.encodePacked(toString(quantity), " ", resource));
         return output;
