@@ -1278,9 +1278,6 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     ERC721 loot = ERC721(0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7);
 
-    uint256 public lootersPrice = 30000000000000000; //0.03 ETH
-    uint256 public publicPrice = 150000000000000000; //0.15 ETH
-
     function withdraw() public onlyOwner {
         uint256 balance = address(this).balance;
         payable(msg.sender).transfer(balance);
@@ -1360,16 +1357,14 @@ contract LootResources is ERC721Enumerable, ReentrancyGuard, Ownable {
         return output;
     }
 
-    function claim(uint256 tokenId) public payable nonReentrant {
+    function claim(uint256 tokenId) public nonReentrant {
         require(tokenId > 8000 && tokenId < 9576, "Token ID invalid");
-        require(msg.value >= publicPrice, "Not enough Ether");
         _safeMint(_msgSender(), tokenId);
     }
    
-    function claimForLoot(uint256 tokenId) public payable nonReentrant {
+    function claimForLoot(uint256 tokenId) public nonReentrant {
         require(tokenId > 0 && tokenId < 8001, "Token ID invalid");
         require(loot.ownerOf(tokenId) == msg.sender, "Not Loot owner");
-        require(msg.value >= lootersPrice, "Not enough Ether");
         _safeMint(_msgSender(), tokenId);
     }
     
